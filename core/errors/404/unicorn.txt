@@ -1,13 +1,13 @@
 404 - Unicorn Mishap!
 
 <h1>Unicorn 404</h1>
-<h3>You've stumbled upon a magical mishap! 🦄</h3>
-<p>Oh dear, it seems our magical unicorn has misplaced this page! Don't worry, we're on the case to find it.</p>
+<h3>You&apos;ve stumbled upon a magical mishap! 🦄</h3>
+<p>Oh dear, it seems our magical unicorn has misplaced this page! Don&apos;t worry, we&apos;re on the case to find it.</p>
 <p>Magical Solutions:
 <ul>
-<li>Double-check your spell: Ensure you've typed the correct URL.</li>
-<li>Use your browser's magic wand: This might teleport you back to the right place.</li>
+<li>Double-check your spell: Ensure you&apos;ve typed the correct URL.</li>
+<li>Use your browser&apos;s magic wand: This might teleport you back to the right place.</li>
 <li>Search our enchanted forest: Use the search bar to find your way.</li>
-<li>Consult our wise unicorns: If you're still lost, contact our support team at webdev-support@mimmeer.anonaddy.com.</li>
+<li>Consult our wise unicorns: If you&apos;re still lost, contact our support team at webdev-support@mimmeer.anonaddy.com.</li>
 </ul>
 </p>
