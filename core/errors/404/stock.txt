@@ -1,0 +1,13 @@
+404 - Sold Out!
+
+<h1>Out of Stock</h1>
+<h3>Looks like this page is out of print!</h3>
+<p>It seems like this page has been a bestseller and has temporarily sold out. Don't worry, we're working hard to restock it as soon as possible.</p>
+
+<p>What to do next:
+<ul>
+<li>Double-check your order: Make sure you've typed the correct URL.</li>
+<li>Browse our shelves: Use the search bar to find something similar.</li>
+<li>Contact our customer service: If you need further assistance, please contact us at webdev-support@mimmeer.anonaddy.com.</li>
+</ul>
+</p>
