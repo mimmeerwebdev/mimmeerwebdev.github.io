@@ -1,4 +1,4 @@
 404 Blackhole!
 <h1>404 - It's a blackhole!</h1>
-<h3>404 - Oops, You've Stumbled into a Black Hole!</h3>
+<h3>404 - Oops, You've Stumbled into a Black Hole! ⚫</h3>
 <p>This page has vanished into the void! To escape, try checking the URL or going back to the last page you were on.</p>
