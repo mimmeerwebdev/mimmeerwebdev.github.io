@@ -21,10 +21,6 @@ fetch(filePath)
     // Display the remaining lines as content within the target element
     mainDocElement.innerHTML = lines.slice(1).join('<br>');
   })
-  .catch(error => {
-    // Display a custom 404 message
-    mainDocElement.innerHTML = `<h1>404</h1><p>This tutorial is missing! Where is it? To try and find it check that URL at the top!</p>`;
-  });
 
 fetch(navPath)
   .then(response => response.text())
