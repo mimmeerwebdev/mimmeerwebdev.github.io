@@ -1,0 +1,4 @@
+404 Unicorn!
+<h1>404 Unicorn Page!</h1>
+<h3>This is like a unicorn: it doesn't exist! 🦄</h3>
+<p>Although, you can find a real Unicorn by checking the Unicorn URL or that one link that took you here!</p>
