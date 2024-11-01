@@ -23,7 +23,7 @@ fetch(filePath)
   })
   .catch(error => {
     // Handle 404 errors here
-    const errorFiles = ['unicorn.txt', 'blackhole.txt', 'holiday.txt', 'stock.txt']; // List of error files
+    const errorFiles = ['unicorn.txt', 'blackhole.txt', 'digital.txt', 'stock.txt']; // List of error files
     const randomErrorFile = errorFiles[Math.floor(Math.random() * errorFiles.length)];
     const randomErrorPath = 'core/errors/404/' + randomErrorFile;
 
