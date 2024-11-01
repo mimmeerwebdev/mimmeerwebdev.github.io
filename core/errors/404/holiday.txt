@@ -1,0 +1,13 @@
+404 - This Page is on Vacation
+
+<h1>Page Missing</h1>
+<h3>Gone Fishin'!</h3>
+<p>This page is currently enjoying a much-needed vacation. It'll be back soon, we promise!</p>
+<p>Ways to Fix:
+<ul>
+<li>Double-check the URL: Make sure you typed it correctly.</li>
+<li>Use your browser's back button: This might take you to the page you were on before.</li>
+<li>Try searching our website: Use the search bar to find what you're looking for.</li>
+<li>Contact us: If you're still having trouble, please contact our support team at webdev-support@mimmeer.anonaddy.com.</li>
+</ul>
+</p>
