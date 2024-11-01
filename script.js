@@ -8,7 +8,7 @@ const filePath = `tutorials/${tutorial}/page${page}.txt`;
 const navPath = `core/nav.html`;
 const footPath = `core/foot.html`;
 
-// Fetch the content from the specified file
+// Fetch the tutorial content
 fetch(filePath)
   .then(response => response.text())
   .then(text => {
@@ -21,28 +21,42 @@ fetch(filePath)
     // Display the remaining lines as content within the target element
     mainDocElement.innerHTML = lines.slice(1).join('<br>');
   })
+  .catch(error => {
+    // Handle 404 errors here
+    const errorFiles = ['unicorn.txt', 'blackhole.txt', '//other error pages']; // List of error files
+    const randomErrorFile = errorFiles[Math.floor(Math.random() * errorFiles.length)];
+    const randomErrorPath = 'core/errors/404/' + randomErrorFile;
 
+    fetch(randomErrorPath)
+      .then(response => response.text())
+      .then(errorContent => {
+        mainDocElement.innerHTML = errorContent;
+      })
+      .catch(error => {
+        // Handle the error if the random 404 page cannot be fetched
+        console.error('Error fetching 404 error page:', error);
+        mainDocElement.innerHTML = '<h1>404 - Page Not Found</h1><p>This is a missing page, one most fought after... JUST KIDDING! It&apos;s a 404 page.</p>';
+      });
+  });
+
+// Fetch the navigation content
 fetch(navPath)
   .then(response => response.text())
   .then(navHTML => {
-    const navElement = document.querySelector('header');
-    navElement.innerHTML = navHTML;
+    const headerElement = document.querySelector('header');
+    headerElement.innerHTML = navHTML;
   })
   .catch(error => {
-    const navElement = document.querySelector('header');
-    console.error('Sorry, navigation is not avalible. Error:', error);
-    navElement.innerHTML = "Sorry, the header isn&apos;t here.";
+    console.error('Error fetching navigation:', error);
   });
 
+// Fetch the footer content
 fetch(footPath)
   .then(response => response.text())
   .then(footHTML => {
-      const footerElement = document.querySelector('footer');
-    document.querySelector('footer').innerHTML = footHTML;
-      footerElement.innerHTML = footHTML;
+    const footerElement = document.querySelector('footer');
+    footerElement.innerHTML = footHTML;
   })
   .catch(error => {
-      const footerElement = document.querySelector('footer');
-    console.error('Sorry, the footer isn&apost here:', error);
-    footerElement.innerHTML = "Sorry, the footer isn&apos;t here.";
+    console.error('Error fetching footer:', error);
   });
