@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tabs Example</title>
+  <style>
+    /* Your CSS styles here */
+    .tabs {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;
+    }
+
+    .tabs li {
+      float: left;
+    }
+
+    .tabs li a {
+      display: block;
+      color: black;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    .tabs li a:hover {
+      background-color: #ddd;
+    }
+
+    .tabs li a:active {
+      background-color: #ccc;
+    }
+
+    /* Add styles for the content divs as needed */
+    #html, #css, #js {
+      display: none;
+      padding: 20px;
+    }
+
+    #html.active, #css.active, #js.active {
+      display: block;
+    }
+  </style>
+  <script>
+    // JavaScript to handle tab switching
+    const tabs = document.querySelectorAll('.tabs li a');
+    const content = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetId = tab.getAttribute('href');
+        const targetContent = document.querySelector(targetId);
+
+        // Remove 'active' class from all tabs and content
+        tabs.forEach(tab => tab.classList.remove('active'));
+        content.forEach(content => content.classList.remove('active'));
+
+        // Add 'active' class to the clicked tab and its corresponding content
+        tab.classList.add('active');
+        targetContent.classList.add('active');
+      });
+    });
+  </script>
+</head>
+<body>
+  <ul class="tabs">
+    <li><a href="#html">HTML</a></li>
+    <li><a href="#css">CSS</a></li>
+    <li><a href="#js">JS</a></li>
+  </ul>
+
+  <div id="html" class="tab-content">
+    </div>
+
+  <div id="css" class="tab-content">
+    </div>
+
+  <div id="js" class="tab-content">
+    </div>
+</body>
+</html>
