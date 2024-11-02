@@ -19,6 +19,12 @@ fetch(metadataPath)
     const title = metadata.title;
     const length = metadata.length;
     const pages = metadata.pages; // Access the "pages" property
+  })
+  .catch(error => {
+    // Handle errors fetching metadata
+    console.error('Error fetching metadata:', error);
+    // Display an error message or redirect to a 404 page
+  });
 
     // Update the title
     document.querySelector('title').textContent = title;
@@ -57,11 +63,6 @@ fetch(metadataPath)
           });
       });
   })
-  .catch(error => {
-    // Handle errors fetching metadata
-    console.error('Error fetching metadata:', error);
-    // Display an error message or redirect to a 404 page
-  });
 
 // Fetch the navigation content
 fetch(navPath)
