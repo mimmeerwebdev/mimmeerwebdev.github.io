@@ -1,6 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const tutorial = urlParams.get('tutorial');
 const page = urlParams.get('page');
+const page2 = parseInt(page);
 const mainDocElement = document.getElementById('maindoc');
 
 // Construct the file paths
@@ -32,10 +33,10 @@ fetch(metadataPath)
         // Add a progress bar or page number indicator
         const progressBar = document.getElementById('page-indicator');
         progressBar.max = pages;
-        progressBar.value = page + 1; // Adjust for 0-based indexing
+        progressBar.value = page2 + 1; // Adjust for 0-based indexing
 
         const pageNumber = document.getElementById('page-number');
-        const pageFix = page + 1;
+        const pageFix = page2 + 1;
         pageNumber.innerHTML = `Page ` + pageFix + ` of ${pages}`;
         mainDocElement.appendChild(pageNumber);
       })
