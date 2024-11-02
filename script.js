@@ -36,7 +36,7 @@ fetch(metadataPath)
 
         const pageNumber = document.getElementById('page-number');
         const pageFix = page + 1;
-        pageNumber.innerHTML = `Page` + pageFix + `of ${pages}`;
+        pageNumber.innerHTML = `Page ` + pageFix + ` of ${pages}`;
         mainDocElement.appendChild(pageNumber);
       })
       .catch(error => {
