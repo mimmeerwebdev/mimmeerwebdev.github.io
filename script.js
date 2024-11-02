@@ -35,8 +35,8 @@ fetch(metadataPath)
         progressBar.value = page + 1; // Adjust for 0-based indexing
 
         const pageNumber = document.getElementById('page-number');
-        const pageFix = pageNumber + 1;
-        pageNumber.textContent = `Page` + pageNumber + `of ${pages}`;
+        const pageFix = page + 1;
+        pageNumber.innerHTML = `Page` + pageFix + `of ${pages}`;
         mainDocElement.appendChild(pageNumber);
       })
       .catch(error => {
