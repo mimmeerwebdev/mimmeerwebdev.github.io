@@ -17,6 +17,7 @@ fetch(metadataPath)
     const metadata = JSON.parse(metadataText);
     const title = metadata.title;
     const length = metadata.length;
+    const pages = metadata.pages; // Access the "pages" property
 
     // Update the title
     document.querySelector('title').textContent = title;
@@ -26,27 +27,40 @@ fetch(metadataPath)
       .then(response => response.text())
       .then(text => {
         // Display the remaining lines as content within the target element
-        mainDocElement.innerHTML = text; // You can still use `lines.slice(1).join('<br>')` if needed
-      })
-  })
-  .catch(error => {
-    // Handle 404 errors here
-    const errorFiles = ['unicorn.txt', 'blackhole.txt', 'digital.txt', 'stock.txt']; // List of error files
-    const randomErrorFile = errorFiles[Math.floor(Math.random() * errorFiles.length)];
-    const randomErrorPath = 'core/errors/404/' + randomErrorFile;
+        mainDocElement.innerHTML = text;
 
-    fetch(randomErrorPath)
-      .then(response => response.text())
-      .then(errorContent => {
-        mainDocElement.innerHTML = errorContent;
+        // Add a progress bar or page number indicator
+        const progressBar = document.createElement('div');
+        progressBar.classList.add('progress-bar');
+        progressBar.style.width = `${(page + 1) / pages * 100}%`; // Calculate progress based on pages
+        mainDocElement.appendChild(progressBar);
+
+        const pageNumber = document.createElement('p');
+        pageNumber.textContent = `Page ${page + 1} of ${pages}`;
+        mainDocElement.appendChild(pageNumber);
       })
       .catch(error => {
-        // Handle the error if the random 404 page cannot be fetched
-        console.error('Error fetching 404 error page:', error);
-        mainDocElement.innerHTML = '<h1>404 - Page Not Found</h1><p>This is a missing page, one most fought after... JUST KIDDING! It&apos;s a 404 page.</p>';
-      });
-  });
+        // Handle 404 errors here
+        const errorFiles = ['unicorn.txt', 'blackhole.txt', 'digital.txt', 'stock.txt']; // List of error files
+        const randomErrorFile = errorFiles[Math.floor(Math.random() * errorFiles.length)];
+        const randomErrorPath = 'core/errors/404/' + randomErrorFile;
 
+        fetch(randomErrorPath)
+          .then(response => response.text())
+          .then(errorContent => {
+            mainDocElement.innerHTML = errorContent;
+          })
+          .catch(error => {
+            console.error('Error fetching 404 error page:', error);
+            mainDocElement.innerHTML = '<h1>404 - Page Not Found</h1><p>This is a missing page, one most fought after... JUST KIDDING! It&apos;s a 404 page.</p>';
+          });
+      });
+  })
+  .catch(error => {
+    // Handle errors fetching metadata
+    console.error('Error fetching metadata:', error);
+    // Display an error message or redirect to a 404 page
+  });
 
 // Fetch the navigation content
 fetch(navPath)
