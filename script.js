@@ -5,21 +5,28 @@ const mainDocElement = document.getElementById('maindoc');
 
 // Construct the file path based on tutorial and page parameters
 const filePath = `tutorials/${tutorial}/page${page}.txt`;
+const metadataPath = `tutorials/${tutorial}/metadata.txt`;
 const navPath = `core/nav.html`;
 const footPath = `core/foot.html`;
 
-// Fetch the tutorial content
-fetch(filePath)
+// Fetch the metadata file first
+fetch(metadataPath)
   .then(response => response.text())
-  .then(text => {
-    // Split the text into lines
-    const lines = text.split('\n');
+  .then(metadataText => {
+    // Parse the metadata
+    const metadata = JSON.parse(metadataText);
+    const title = metadata.title;
+    const length = metadata.length;
 
-    // Update the title within the existing `<title>` tag
-    document.querySelector('title').textContent = lines[0];
+    // Update the title
+    document.querySelector('title').textContent = title;
 
-    // Display the remaining lines as content within the target element
-    mainDocElement.innerHTML = lines.slice(1).join('<br>');
+    // Fetch the tutorial content
+    fetch(filePath)
+      .then(response => response.text())
+      .then(text => {
+        // Display the remaining lines as content within the target element
+        mainDocElement.innerHTML = text;
   })
   .catch(error => {
     // Handle 404 errors here
