@@ -1,4 +1,5 @@
 {
   "title": "Web Development - A beginning.",
-  "length": 3
+  "length": "2:42",
+  "pages": 2
 }
