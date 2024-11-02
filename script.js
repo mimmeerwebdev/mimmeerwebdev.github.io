@@ -3,12 +3,6 @@ const tutorial = urlParams.get('tutorial');
 const page = urlParams.get('page');
 const mainDocElement = document.getElementById('maindoc');
 
-// Construct the file path based on tutorial and page parameters
-const urlParams = new URLSearchParams(window.location.search);
-const tutorial = urlParams.get('tutorial');
-const page = urlParams.get('page');
-const mainDocElement = document.getElementById('maindoc');
-
 // Construct the file paths
 const filePath = `tutorials/${tutorial}/page${page}.txt`;
 const metadataPath = `tutorials/${tutorial}/metadata.txt`;
