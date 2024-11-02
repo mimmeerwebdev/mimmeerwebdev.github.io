@@ -1,89 +1,71 @@
-const urlParams = new URLSearchParams(window.location.search);
-const tutorial = urlParams.get('tutorial');
-const page = urlParams.get('page');
-const page2 = parseInt(page);
-const mainDocElement = document.getElementById('maindoc');
+async function fetchTutorial(tutorial, page) {
+  try {
+    const mainDocElement = document.getElementById('maindoc');
 
-// Construct the file paths
-const filePath = `tutorials/${tutorial}/page${page}.txt`;
-const metadataPath = `tutorials/${tutorial}/metadata.txt`;
-const navPath = `core/nav.html`;
-const footPath = `core/foot.html`;
+    // Construct the file paths
+    const filePath = `tutorials/${tutorial}/page${page}.txt`;
+    const metadataPath = `tutorials/${tutorial}/metadata.txt`;
 
-// Fetch the metadata file first
-fetch(metadataPath)
-  .then(response => response.text())
-  .then(metadataText => {
-    // Parse the metadata
-    const metadata = JSON.parse(metadataText);
-    const title = metadata.title;
-    const length = metadata.length;
-    const pages = metadata.pages; // Access the "pages" property
-  })
-
-    // Update the title
-    document.querySelector('title').textContent = title;
-
-    // Fetch the tutorial content
-    fetch(filePath)
-      if (!response.ok) {
-      throw new Error('Failed to fetch tutorial content');
+    // Fetch metadata first
+    const response = await fetch(metadataPath);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch metadata: ${response.status}`);
     }
-    return response.text();
-      .then(text => {
-        // Display the remaining lines as content within the target element
-        mainDocElement.innerHTML = text;
+    const metadataText = await response.text();
+    const metadata = JSON.parse(metadataText);
 
-        // Add a progress bar or page number indicator
-        const progressBar = document.getElementById('page-indicator');
-        progressBar.max = pages;
-        progressBar.value = page2 + 1; // Adjust for 0-based indexing
+    // Update title
+    document.querySelector('title').textContent = metadata.title;
 
-        const pageNumber = document.getElementById('page-number');
-        const pageFix = page2 + 1;
-        pageNumber.innerHTML = `Page ` + pageFix + ` of ${pages}`;
-        mainDocElement.appendChild(pageNumber);
+    // Fetch tutorial content
+    const contentResponse = await fetch(filePath);
+    if (!contentResponse.ok) {
+      throw new Error(`Failed to fetch tutorial content: ${contentResponse.status}`);
+    }
+    const text = await response.text();
+
+    // Display content
+    mainDocElement.innerHTML = text;
+
+    // Add progress bar and page number
+    const progressBar = document.getElementById('page-indicator');
+    progressBar.max = metadata.pages;
+    progressBar.value = page + 1; // Adjust for 0-based indexing
+
+    const pageNumber = document.getElementById('page-number');
+    pageNumber.textContent = `Page ${page + 1} of ${metadata.pages}`;
+    mainDocElement.appendChild(pageNumber);
+  } catch (error) {
+    console.error('Error fetching tutorial:', error);
+    // Handle errors (e.g., display a generic error message or redirect to a 404 page)
+  } finally {
+    // Fetch navigation and footer content (assuming these are always needed)
+    fetch(navPath)
+      .then(response => response.text())
+      .then(navHTML => {
+        const headerElement = document.querySelector('header');
+        headerElement.innerHTML = navHTML;
       })
       .catch(error => {
-        // Handle 404 errors here
-        const errorFiles = ['unicorn.txt', 'blackhole.txt', 'digital.txt', 'stock.txt']; // List of error files
-        const randomErrorFile = errorFiles[Math.floor(Math.random() * errorFiles.length)];
-        const randomErrorPath = 'core/errors/404/' + randomErrorFile;
-
-        fetch(randomErrorPath)
-          .then(response => response.text())
-          .then(errorContent => {
-            mainDocElement.innerHTML = errorContent;
-          })
-          .catch(error => {
-            console.error('Error fetching 404 error page:', error);
-            mainDocElement.innerHTML = '<h1>404 - Page Not Found</h1><p>This is a missing page, one most fought after... JUST KIDDING! It&apos;s a 404 page.</p>';
-          });
-        .catch(error => {
-    // Handle errors fetching metadata
-    console.error('Error fetching metadata:', error);
-    // Display an error message or redirect to a 404 page
-        });
+        console.error('Error fetching navigation:', error);
       });
 
-// Fetch the navigation content
-fetch(navPath)
-  .then(response => response.text())
-  .then(navHTML => {
-    const headerElement = document.querySelector('header');
-    headerElement.innerHTML = navHTML;
-  })
-  .catch(error => {
-    console.error('Error fetching navigation:', error);
-  });
+    fetch(footPath)
+      .then(response => response.text())
+      .then(footHTML => {
+        const footerElement = document.querySelector('footer');
+        footerElement.innerHTML = footHTML;
+      })
+      .catch(error => {
+        console.error('Error fetching footer:', error);
+      });
+  }
+}
 
-// Fetch the footer content
-fetch(footPath)
-  .then(response => response.text())
-  .then(footHTML => {
-    const footerElement = document.querySelector('footer');
-    footerElement.innerHTML = footHTML;
-  })
-  .catch(error => {
-    console.error('Error fetching footer:', error);
-  });
+// Get tutorial and page from URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+const tutorial = urlParams.get('tutorial');
+const page = parseInt(urlParams.get('page'));
+
+// Call the fetch function
+fetchTutorial(tutorial, page);
