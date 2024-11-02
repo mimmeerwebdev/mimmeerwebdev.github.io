@@ -29,15 +29,12 @@ fetch(metadataPath)
         // Display the remaining lines as content within the target element
         mainDocElement.innerHTML = text;
 
-        // Add a progress bar or page number indicator
-        const progressBar = document.createElement('div');
-        progressBar.classList.add('progress-bar');
-        progressBar.style.width = `${(page + 1) / pages * 100}%`; // Calculate progress based on pages
-        mainDocElement.appendChild(progressBar);
+        const progressBar = document.getElementById('page-indicator');
+progressBar.max = pages;
+progressBar.value = page + 1; // Since page starts from 0
 
-        const pageNumber = document.createElement('p');
-        pageNumber.textContent = `Page ${page + 1} of ${pages}`;
-        mainDocElement.appendChild(pageNumber);
+const pageNumber = document.querySelector('.page-number');
+pageNumber.textContent = `Page ${page + 1} of ${pages}`;
       })
       .catch(error => {
         // Handle 404 errors here
