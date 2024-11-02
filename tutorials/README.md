@@ -6,4 +6,4 @@ These are the Tutorials
 
 To link to the raw text files use this formula:
 
-`mimwebdev.github.io/tutorials/<tutorial-id>`
+`mimmeerwebdev.github.io/tutorials/<tutorial-id>`
