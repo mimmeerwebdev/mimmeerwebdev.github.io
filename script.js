@@ -26,7 +26,10 @@ fetch(metadataPath)
 
     // Fetch the tutorial content
     fetch(filePath)
-      .then(response => response.text())
+      if (!response.ok) {
+      throw new Error('Failed to fetch tutorial content');
+    }
+    return response.text();
       .then(text => {
         // Display the remaining lines as content within the target element
         mainDocElement.innerHTML = text;
