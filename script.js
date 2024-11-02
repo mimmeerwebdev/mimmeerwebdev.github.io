@@ -4,6 +4,12 @@ const page = urlParams.get('page');
 const mainDocElement = document.getElementById('maindoc');
 
 // Construct the file path based on tutorial and page parameters
+const urlParams = new URLSearchParams(window.location.search);
+const tutorial = urlParams.get('tutorial');
+const page = urlParams.get('page');
+const mainDocElement = document.getElementById('maindoc');
+
+// Construct the file paths
 const filePath = `tutorials/${tutorial}/page${page}.txt`;
 const metadataPath = `tutorials/${tutorial}/metadata.txt`;
 const navPath = `core/nav.html`;
@@ -26,7 +32,8 @@ fetch(metadataPath)
       .then(response => response.text())
       .then(text => {
         // Display the remaining lines as content within the target element
-        mainDocElement.innerHTML = text;
+        mainDocElement.innerHTML = text; // You can still use `lines.slice(1).join('<br>')` if needed
+      })
   })
   .catch(error => {
     // Handle 404 errors here
@@ -45,6 +52,12 @@ fetch(metadataPath)
         mainDocElement.innerHTML = '<h1>404 - Page Not Found</h1><p>This is a missing page, one most fought after... JUST KIDDING! It&apos;s a 404 page.</p>';
       });
   });
+.catch(error => {
+    // Handle errors fetching metadata
+    console.error('Error fetching metadata:', error);
+    // Display an error message or redirect to a 404 page
+  });
+
 
 // Fetch the navigation content
 fetch(navPath)
