@@ -62,7 +62,7 @@ fetch(metadataPath)
             mainDocElement.innerHTML = '<h1>404 - Page Not Found</h1><p>This is a missing page, one most fought after... JUST KIDDING! It&apos;s a 404 page.</p>';
           });
       });
-  })
+  )
 
 // Fetch the navigation content
 fetch(navPath)
